@@ -2,7 +2,7 @@
 <!--
 
     Kodo Kojo - Software factory done right
-    Copyright © 2017 Kodo Kojo (infos@kodokojo.io)
+    Copyright © 2018 Kodo Kojo (infos@kodokojo.io)
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -182,6 +182,7 @@
 
     <build>
         <sourceDirectory>src/main/java/io.kodokojo.property.configurer</sourceDirectory>
+        <testSourceDirectory>src/test/java/io.kodokojo.property.configurer</testSourceDirectory>
         <resources>
             <resource>
                 <directory>${basedir}/src/main/resources</directory>
@@ -217,18 +218,6 @@
                 <configuration>
                     <format>html</format>
                 </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-source-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <id>attach-sources</id>
-                        <goals>
-                            <goal>jar</goal>
-                        </goals>
-                    </execution>
-                </executions>
             </plugin>
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
@@ -433,7 +422,7 @@
                     <plugin>
                         <groupId>com.mycila</groupId>
                         <artifactId>license-maven-plugin</artifactId>
-                        <version>2.3</version>
+                        <version>3.0</version>
                         <configuration>
                             <header>etc/license/GPL-v3.txt</header>
                             <properties>
@@ -461,16 +450,14 @@
             </build>
         </profile>
     </profiles>
+
     <repositories>
         <repository>
             <id>jitpack.io</id>
             <url>https://jitpack.io</url>
         </repository>
-        <repository>
-            <id>nexus.kodokojo.io</id>
-            <url>https://nexus.kodokojo.io/repository/maven-public/</url>
-        </repository>
     </repositories>
+
     <distributionManagement>
         <snapshotRepository>
             <id>ossrh</id>
@@ -487,7 +474,7 @@
             <url>http://www.gnu.org/licenses/gpl-3.0.en.html</url>
         </license>
     </licenses>
-    <inceptionYear>2017</inceptionYear>
+    <inceptionYear>2018</inceptionYear>
     <organization>
         <name>Kodo-kojo</name>
         <url>https://kodokojo.io</url>
