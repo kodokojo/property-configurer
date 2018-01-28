@@ -25,13 +25,17 @@
     <artifactId>property-configurer</artifactId>
     <version>0.2.0-SNAPSHOT</version>
 
+    <name>Kodo Kojo Property Configurer</name>
     <description>Software factory done right</description>
+
+    <url>https://kodokojo.io</url>
     <scm>
         <url>https://github.com/kodokojo/property-configurer</url>
         <connection>scm:git:git://github.com/kodokojo/property-configurer.git</connection>
         <developerConnection>scm:git:git@github.com:kodokojo/property-configurer.git</developerConnection>
         <tag>HEAD</tag>
     </scm>
+
     <properties>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
