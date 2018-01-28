@@ -15,10 +15,16 @@
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see http://www.gnu.org/licenses.
  */
-package io.kodokojo.property.configurer.config.properties;
+package io.kodokojo.property.configurer;
 
+/**
+ * Describe a set of property configuration.
+ */
 public interface PropertyConfig {
 
+    /**
+     * Validate that the content of this PropertyConfig is valid.
+     */
     default void valid() {
         //
     }

@@ -15,27 +15,28 @@
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see http://www.gnu.org/licenses.
  */
-package io.kodokojo.property.configurer.config.properties.provider;
+package io.kodokojo.property.configurer.provider;
 
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.Properties;
 
-import static org.apache.commons.lang.StringUtils.isBlank;
+import static org.apache.commons.lang3.StringUtils.isBlank;
 
-public class OrderedMergedValueProvider implements PropertyValueProvider {
+/**
+ * {@link PropertyValueProvider} which lookup in a given {@link Properties}.
+ */
+public class PropertiesValueProvider implements PropertyValueProvider {
 
-    private final List<PropertyValueProvider> propertyValueProviders;
+    private final Properties properties;
 
-    public OrderedMergedValueProvider(LinkedList<PropertyValueProvider> propertyValueProviders) {
-        if (propertyValueProviders == null) {
-            throw new IllegalArgumentException("propertyValueProviders must be defined.");
+    public PropertiesValueProvider(Properties properties) {
+        if (properties == null) {
+            throw new IllegalArgumentException("properties must be defined.");
         }
-        this.propertyValueProviders = propertyValueProviders;
+        this.properties = properties;
     }
 
-
     @Override
+    @SuppressWarnings("unchecked")
     public <T> T providePropertyValue(Class<T> classType, String key) {
         if (classType == null) {
             throw new IllegalArgumentException("classType must be defined.");
@@ -43,12 +44,10 @@ public class OrderedMergedValueProvider implements PropertyValueProvider {
         if (isBlank(key)) {
             throw new IllegalArgumentException("key must be defined.");
         }
-        T res = null;
-        Iterator<? extends PropertyValueProvider> iterator = propertyValueProviders.iterator();
-        while (res == null && iterator.hasNext()) {
-            PropertyValueProvider valueProvider = iterator.next();
-            res = valueProvider.providePropertyValue(classType, key);
+        Object valueObject = properties.get(key);
+        if (valueObject != null && !classType.isAssignableFrom(valueObject.getClass())) {
+            throw new IllegalArgumentException("Property key return value '" + valueObject + "' which type '" + valueObject.getClass().getCanonicalName() + " is not the expected '" + classType.getCanonicalName() + "'.");
         }
-        return res;
+        return (T) valueObject;
     }
 }

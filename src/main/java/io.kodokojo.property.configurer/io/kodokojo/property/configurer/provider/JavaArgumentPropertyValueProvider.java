@@ -1,35 +1,38 @@
 /**
  * Kodo Kojo - Software factory done right
  * Copyright © 2018 Kodo Kojo (infos@kodokojo.io)
- *
+ * <p>
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- *
+ * <p>
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- *
+ * <p>
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see http://www.gnu.org/licenses.
  */
-package io.kodokojo.property.configurer.config.properties.provider;
+package io.kodokojo.property.configurer.provider;
 
-import org.apache.commons.lang.StringUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.commons.lang3.StringUtils;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import static org.apache.commons.lang.StringUtils.isBlank;
+import static org.apache.commons.lang3.StringUtils.isBlank;
 
-public class JavaArgumentPropertyValueProvider extends AbstarctStringPropertyValueProvider {
+/**
+ * A property provider which lookup in an array of String, like Java arguments.
+ */
+public class JavaArgumentPropertyValueProvider extends AbstractStringPropertyValueProvider {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(JavaArgumentPropertyValueProvider.class);
+    //private static final Logger LOGGER = LoggerFactory.getLogger(JavaArgumentPropertyValueProvider.class);
+
+    private static final System.Logger LOGGER = System.getLogger(JavaArgumentPropertyValueProvider.class.getName());
 
     public static final String DEFAULT_PREFIX = "--";
 
@@ -45,18 +48,18 @@ public class JavaArgumentPropertyValueProvider extends AbstarctStringPropertyVal
         }
         cache = new HashMap<>();
         String currentKey = null;
-        for(String arg : args) {
+        for (String arg : args) {
             if (arg.startsWith(prefix)) {
                 if (StringUtils.isNotBlank(currentKey)) {
-                    cache.put(currentKey,Boolean.TRUE.toString());
+                    cache.put(currentKey, Boolean.TRUE.toString());
                 }
                 currentKey = arg.substring(prefix.length());
             } else {
                 if (StringUtils.isNotBlank(currentKey)) {
                     cache.put(currentKey, arg);
                     currentKey = null;
-                } else if (LOGGER.isDebugEnabled()) {
-                    LOGGER.debug("The value '{}' has no key, ignore it", arg);
+                } else if (LOGGER.isLoggable(System.Logger.Level.DEBUG)) {
+                    LOGGER.log(System.Logger.Level.DEBUG, "The value '%s' has no key, ignore it", arg);
                 }
             }
         }

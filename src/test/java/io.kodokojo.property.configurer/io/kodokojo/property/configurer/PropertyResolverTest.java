@@ -1,23 +1,23 @@
 /**
  * Kodo Kojo - Software factory done right
  * Copyright © 2018 Kodo Kojo (infos@kodokojo.io)
- *
+ * <p>
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- *
+ * <p>
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- *
+ * <p>
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see http://www.gnu.org/licenses.
  */
-package io.kodokojo.property.configurer.config.properties;
+package io.kodokojo.property.configurer;
 
-import io.kodokojo.property.configurer.config.properties.provider.PropertyValueProvider;
+import io.kodokojo.property.configurer.provider.PropertyValueProvider;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -68,17 +68,17 @@ class PropertyResolverTest {
     public void emptyDefaultValueThrowException() {
 
         DefaultNumber defaultNumber = createConfig(DefaultNumber.class, createPropertyValueProvider(), false);
-        boolean iseSent = false;
+        boolean isSent = false;
         try {
             defaultNumber.phoneNumber();
             fail("Expecting an exception.");
         } catch (NumberFormatException n) {
             fail("Not expected exception", n);
         } catch (IllegalStateException e) {
-            iseSent = true;
+            isSent = true;
             assertThat(e.getMessage()).contains("Invalid value for key 'props.number' : ''");
         }
-        assertThat(iseSent).isTrue();
+        assertThat(isSent).isTrue();
     }
 
     private static PropertyValueProvider createPropertyValueProvider() {

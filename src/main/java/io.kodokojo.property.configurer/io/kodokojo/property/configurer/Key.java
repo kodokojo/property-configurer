@@ -15,19 +15,31 @@
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see http://www.gnu.org/licenses.
  */
-package io.kodokojo.property.configurer.config.properties;
+package io.kodokojo.property.configurer;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
+/**
+ * Annotation to defined on method in an {@link PropertyConfig} which define the key to solve the value requested by
+ * the method.
+ */
 @Target(ElementType.METHOD)
 @Retention(RetentionPolicy.RUNTIME)
 public @interface Key {
 
+    /**
+     * Key name which allow to resolve the property.
+     * @return The key property.
+     */
     String value();
 
+    /**
+     * The default value of the given property if no value could be provided.
+     * @return The default property value.
+     */
     String defaultValue() default "";
 
 }
