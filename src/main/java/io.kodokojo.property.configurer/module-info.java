@@ -15,9 +15,11 @@
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see http://www.gnu.org/licenses.
  */
-module io.kodokojo.property.configurer {
-    requires slf4j.api;
-    requires commons.lang;
+open module io.kodokojo.property.configurer {
 
+    requires org.apache.commons.lang3;
+
+    exports io.kodokojo.property.configurer;
+    exports io.kodokojo.property.configurer.provider;
 
 }

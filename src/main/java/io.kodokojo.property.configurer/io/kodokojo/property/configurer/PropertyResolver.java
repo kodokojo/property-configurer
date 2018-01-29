@@ -15,10 +15,10 @@
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see http://www.gnu.org/licenses.
  */
-package io.kodokojo.property.configurer.config.properties;
+package io.kodokojo.property.configurer;
 
 
-import io.kodokojo.property.configurer.config.properties.provider.PropertyValueProvider;
+import io.kodokojo.property.configurer.provider.PropertyValueProvider;
 
 import java.lang.invoke.MethodHandles;
 import java.lang.invoke.MethodType;
@@ -27,7 +27,10 @@ import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
 import java.math.BigDecimal;
 
-
+/**
+ * A dynamic proxy which inspect an {@link PropertyConfig}, lookup a {@link Key} annotation and try to resolve the
+ * property and return her value.
+ */
 public class PropertyResolver {
 
     public static final String VALID_METHOD_NAME = "valid";
