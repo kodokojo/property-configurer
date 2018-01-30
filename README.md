@@ -22,12 +22,55 @@ Stay tuned by following us on:
 * Twitter : [@kodokojo](http://twitter.com/kodokojo)
 * Gitter : [Gitter](https://gitter.im/kodokojo/kodokojo) 
 
+## Quickstart
+
+
+### Maven configuration
+
+Add following dependency in your `pom.xml` :
+```
+<dependency>
+    <groupId>io.kodokojo</groupId>
+    <artifactId>property-configurer</artifactId>
+    <version>0.1.0</version>
+</dependency>
+```
+
+### Use it
+
+#### Create your Property configuration interface
+
+Create an interface `ApplicationConfiguration` which will be used in your code :
+```java
+interface ApplicationConfiguration extends PropertyConfig {
+        @Key("elasticsearch.host")
+        String elasticsearchHost();
+        
+        @Key(value = "elasticsearch.port", defaultValue = "9200")
+        Integer elasticsearchPort();
+}
+```
+
+In thos sample, we provide the value of method `elasticsearchHost` via the System Env `elasticsearch_host`.
+Create a PropertyResolver:
+```java
+PropertyResolver resolver = new PropertyResolver(new SystemEnvValueProvider());
+ApplicationConfiguration proxy = resolver.createProxy(ApplicationConfiguration.class);
+```
+
+And enjoy :
+
+```java
+System.out.println("Elasticsearch host : " + proxy.elasticsearchHost());
+```
+
+Other property provider are available in this library, or you can provide yours implementing `PropertyValueProvider` interface.
+
 ## Technology inside
 
 * [Java 9](http://java.com)
 * [Maven](https://maven.apache.org/)
 * [Apache Commons](https://commons.apache.org/)
-* [Gson](https://github.com/google/gson)
 
 We use the following tests tools:
 
