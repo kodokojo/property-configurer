@@ -23,7 +23,7 @@
 
     <groupId>io.kodokojo</groupId>
     <artifactId>property-configurer</artifactId>
-    <version>0.1.1-SNAPSHOT</version>
+    <version>0.2.0</version>
 
     <name>Kodo Kojo Property Configurer</name>
     <description>Software factory done right</description>
@@ -33,7 +33,7 @@
         <url>https://github.com/kodokojo/property-configurer</url>
         <connection>scm:git:git://github.com/kodokojo/property-configurer.git</connection>
         <developerConnection>scm:git:git@github.com:kodokojo/property-configurer.git</developerConnection>
-        <tag>HEAD</tag>
+        <tag>v0.2.0</tag>
     </scm>
 
     <properties>
