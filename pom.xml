@@ -18,12 +18,14 @@
     along with this program. If not, see http://www.gnu.org/licenses.
 
 -->
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>io.kodokojo</groupId>
     <artifactId>property-configurer</artifactId>
     <version>0.2.1-SNAPSHOT</version>
+    <packaging>multi-release-jar</packaging>
 
     <name>Kodo Kojo Property Configurer</name>
     <description>Software factory done right</description>
@@ -39,6 +41,12 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+
+        <!--java9.sourceDirectory>${project.basedir}/src/main/java-mr/9/io.kodokojo.property.configurer</java9.sourceDirectory>
+        <java9.build.outputDirectory>${project.build.directory}/classes-java9</java9.build.outputDirectory-->
+
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
 
         <junit.version>5.0.1</junit.version>
         <junit.platform.version>1.0.1</junit.platform.version>
@@ -115,8 +123,13 @@
     </dependencies>
 
     <build>
-        <sourceDirectory>src/main/java/io.kodokojo.property.configurer</sourceDirectory>
-        <testSourceDirectory>src/test/java/io.kodokojo.property.configurer</testSourceDirectory>
+        <extensions>
+            <extension>
+                <groupId>pw.krejci</groupId>
+                <artifactId>multi-release-jar-maven-plugin</artifactId>
+                <version>0.1.4</version>
+            </extension>
+        </extensions>
         <resources>
             <resource>
                 <directory>${basedir}/src/main/resources</directory>
@@ -129,13 +142,13 @@
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.7.0</version>
+                <artifactId>maven-jar-plugin</artifactId>
                 <configuration>
-                    <source>9</source>
-                    <target>9</target>
-                    <showWarnings>true</showWarnings>
-                    <showDeprecation>true</showDeprecation>
+                    <archive>
+                        <manifestEntries>
+                            <Multi-Release>true</Multi-Release>
+                        </manifestEntries>
+                    </archive>
                 </configuration>
             </plugin>
             <plugin>
@@ -166,6 +179,18 @@
                         <groupId>org.junit.platform</groupId>
                         <artifactId>junit-platform-surefire-provider</artifactId>
                         <version>1.0.1</version>
+                    </dependency>
+                </dependencies>
+            </plugin>
+            <plugin>
+                <groupId>org.pitest</groupId>
+                <artifactId>pitest-maven</artifactId>
+                <version>1.3.0</version>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.pitest</groupId>
+                        <artifactId>pitest-junit5-plugin</artifactId>
+                        <version>0.3</version>
                     </dependency>
                 </dependencies>
             </plugin>
