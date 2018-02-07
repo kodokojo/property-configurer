@@ -5,7 +5,7 @@
 Kodo Kojo allows you to get a full out-of-the-box software factory.
 
 This repository provide a small tool which allow us to configure our service and use those configuration in an smart and easy way. 
-This little library is developed as a Java 9 module. 
+This little library is developed as a Java 9 module and could be used under Java 8. 
 
 License
 ------
@@ -23,7 +23,6 @@ Stay tuned by following us on:
 * Gitter : [Gitter](https://gitter.im/kodokojo/kodokojo) 
 
 ## Quickstart
-
 
 ### Maven configuration
 
